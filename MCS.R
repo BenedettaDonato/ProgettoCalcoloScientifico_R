@@ -25,21 +25,24 @@ load_matrix_from_file <- function(filepath) {
 }
 
 # Definisci il percorso del file .mtx
-filepath <- here("MatriciMM", "ex15.mtx")
+# filepath <- here("MatriciMM", "ex15.mtx")
 
 # Carica e stampa la matrice dal file .mtx
-A <- load_matrix_from_file(filepath)
+# A <- load_matrix_from_file(filepath)
 
 # Controlla se la matrice è simmetrica controllando i valori non nulli della trasposta
+
 is_symmetric <- function(A) {
   A_transpose <- t(A)
   return(all(A@x == A_transpose@x))
 }
-if (is_symmetric(A)) {
-  print("La matrice A è simmetrica")
-} else {
-  print("La matrice A non è simmetrica")
-}
+
+#########DA CONTROLLARE ---> bisogna passare un arigomento e renderla funzione, tipo con un booleano
+# if (is_symmetric(A)) {
+  # print("La matrice A è simmetrica")
+# } else {
+  # print("La matrice A non è simmetrica")
+# }
 
 
 # Crea il vettore 'b' a partire dai valori contenuti nella matrice 'A' passata come parametro affinché la soluzione del
@@ -74,18 +77,19 @@ cholesky_decomposition <- function(A) {
 }
 
 # Esegui la fattorizzazione di Cholesky della matrice 'A' e salva il risultato in 'result'
-result <- cholesky_decomposition(A)
+# result <- cholesky_decomposition(A)
 
+#########DA CONTROLLARE ---> bisogna passare un arigomento e renderla funzione, tipo con un booleano
 # Controlla se 'result' contiene la matrice triangolare inferiore 'L'
-if (!is.null(result$factor)) {
+# if (!is.null(result$factor)) {
   # Stampa la matrice triangolare inferiore 'L'
-  print(result$factor)
-} else {
-  print("La matrice A non è definita positiva")
-}
+  # print(result$factor)
+# } else {
+  # print("La matrice A non è definita positiva")
+# }
 
-print(result$factor) # Matrice triangolare inferiore L (fattorizzazione di Cholesky)
-print(result$memoria_utilizzata_chol) # Memoria utilizzata durante la fattorizzazione
+# print(result$factor) # Matrice triangolare inferiore L (fattorizzazione di Cholesky)
+# print(result$memoria_utilizzata_chol) # Memoria utilizzata durante la fattorizzazione
 
 
 # Risolve il sistema lineare Ax=b prendendo in ingresso la matrice 'A' fattorizzata con il metodo di Cholesky e il
