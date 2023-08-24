@@ -48,7 +48,7 @@ create_b_vector <- function(A) {
   n <- nrow(A)
   ones_vector <- rep(1, n)
   b <- A %*% ones_vector
-  print(b)
+  #DEBUG: print(b)
   return(b)
 }
 
@@ -96,7 +96,7 @@ solve_linear_system <- function(factor, b) {
   
   x <- solve(factor, b)
   
-  #DEBUG: print(x)
+  print(x)
   
   # Ottieni la memoria usata dopo la fattorizzazione di Cholesky
   memoria_finale <- proc.time()[3]
