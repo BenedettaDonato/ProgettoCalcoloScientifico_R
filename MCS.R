@@ -58,7 +58,7 @@ cholesky_decomposition <- function(A) {
   
   # Calcola la fattorizzazione di Cholesky 
   tryCatch({
-    factor <- chol(A)
+    factor <- Cholesky(A)
     print("La matrice A è definita positiva")
   }, error = function(err) {
     print("La matrice A non è definita positiva")
@@ -96,7 +96,7 @@ solve_linear_system <- function(factor, b) {
   
   x <- solve(factor, b)
   
-  print(x)
+  # DEBUG: print(x)
   
   # Ottieni la memoria usata dopo la fattorizzazione di Cholesky
   memoria_finale <- proc.time()[3]
@@ -113,7 +113,7 @@ solve_linear_system <- function(factor, b) {
 compute_relative_error <- function(x) {
   n <- length(x)
   x_esatto <- rep(1, n)
-  errore_relativo <- norm(x - x_esatto) / norm(x_esatto)
+  errore_relativo <- norm(x - x_esatto, type = c("2")) / norm(x_esatto, type = c("2"))
   return(errore_relativo)
 }
 
@@ -169,6 +169,8 @@ process_file <- function(filename, cartella) {
   
   # DEBUG: print(soluzione)
   # DEBUG: print(memoria_utilizzata_sistemaLin)
+  
+  # DEBUG: print(soluzione)
   
   errore_relativo <- compute_relative_error(soluzione)
   
