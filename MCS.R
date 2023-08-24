@@ -8,6 +8,7 @@ library(spam64)
 library(tictoc)
 library(matrixcalc)
 library(pryr)
+library(here)
 
 
 
@@ -24,7 +25,7 @@ load_matrix_from_file <- function(filepath) {
 }
 
 # Definisci il percorso del file .mtx
-filepath <- "/Users/benny/MCS/MatriciMM/ex15.mtx"
+filepath <- here("MatriciMM", "ex15.mtx")
 
 # Carica e stampa la matrice dal file .mtx
 A <- load_matrix_from_file(filepath)
@@ -45,7 +46,9 @@ if (is_symmetric(A)) {
 # sistema lineare sia un vettore 'x' composto da tutti 1
 create_b_vector <- function(A) {
   n <- nrow(A)
-  b <- A %*% rep(1, n)
+  ones_vector <- rep(1, n)
+  b <- A %*% ones_vector
+  print(b)
   return(b)
 }
 
@@ -91,7 +94,9 @@ solve_linear_system <- function(factor, b) {
   # Ottieni la memoria usata prima della fattorizzazione di Cholesky
   memoria_iniziale <- proc.time()[3]
   
-  x <- factor %*% b
+  x <- solve(factor, b)
+  
+  #DEBUG: print(x)
   
   # Ottieni la memoria usata dopo la fattorizzazione di Cholesky
   memoria_finale <- proc.time()[3]
@@ -137,9 +142,12 @@ compute_filesize <- function(filename) {
 process_file <- function(filename, cartella) {
   cat("------------------------------ Elaborazione file ", filename, " ------------------------------\n")
   A <- load_matrix_from_file(file.path(cartella, filename))
+  #DEBUG: print(A)
   b <- create_b_vector(A)
   start_time <- Sys.time()
   result <- cholesky_decomposition(A)
+  
+  # DEBUG: print(result$memoria_utilizzata_chol)
   
   # DEBUG: print(result$memoria_utilizzata_chol)
   
@@ -147,7 +155,7 @@ process_file <- function(filename, cartella) {
   soluzione <- result[[1]]
   memoria_utilizzata_sistemaLin <- result[[2]]
   
-  # DEBUG: print(memoria_utilizzata_sistemaLin)
+  print(memoria_utilizzata_sistemaLin)
   
   memoria_totale <- result$memoria_utilizzata_chol + memoria_utilizzata_sistemaLin
   
@@ -158,6 +166,9 @@ process_file <- function(filename, cartella) {
   
   # Stampa il tempo impiegato per la decomposizione di Cholesky
   cat("Tempo di esecuzione per la decomposizione di Cholesky e risoluzione sistema lineare: ", tempo_cholesky, " secondi\n")
+  
+  # DEBUG: print(soluzione)
+  # DEBUG: print(memoria_utilizzata_sistemaLin)
   
   errore_relativo <- compute_relative_error(soluzione)
   
@@ -173,7 +184,7 @@ process_file <- function(filename, cartella) {
               num_nonzeros = num_nonzeros, memoria_totale = memoria_totale, fileSize = fileSize, errore_relativo))
 }
 
-# Definiamo tre vettori per la creazione dei plot
+# Definiamo cinque vettori per la creazione dei plot
 tempi_totali <- vector()
 memoria_cholesky <- vector()
 nomi_matrici <- character()
@@ -210,7 +221,7 @@ files <- files[order(file.info(files)$size)]
 
 # Processa i file .mtx nell'ordine desiderato
 for (filename in files) {
-  result <- process_file(filename)
+  result <- process_file(filename, cartella)
   tempo_cholesky <- result[[1]]
   errore_relativo <- result[[2]]
   memoria_totale <- result[[5]]
