@@ -155,13 +155,18 @@ process_file <- function(filename, cartella) {
   #DEBUG: print(A)
   b <- create_b_vector(A)
   start_time <- Sys.time()
+  cat("Tempo iniziale: ", start_time, "\n")
+  start_time_chol <- Sys.time()
   resultChol <- cholesky_decomposition(A)
-  
+  end_time_chol <- Sys.time()
+  differenza_chol_time <- as.numeric(difftime(end_time_chol, start_time_chol, units = "secs"))
   # DEBUG: print(result$memoria_utilizzata_chol)
   
   # DEBUG: print(result$memoria_utilizzata_chol)
-  
+  start_time_lin <- Sys.time()
   resultLin <- solve_linear_system(resultChol$factor, b)
+  end_time_lin<- Sys.time()
+  differenza_lin_time <- as.numeric(difftime(end_time_lin, start_time_lin, units = "secs"))
   soluzione <- resultLin[[1]]
   memoria_utilizzata_sistemaLin <- resultLin[[2]]
   
@@ -171,7 +176,8 @@ process_file <- function(filename, cartella) {
   cat("Memoria totale utilizzata nella risoluzione: ", round(memoria_totale_mb, 2), " MB\n")
   
   end_time <- Sys.time()
-  tempo_cholesky <- as.numeric(difftime(end_time, start_time, units = "secs"))
+  cat("Tempo finale: ", end_time, "\n")
+  tempo_cholesky <- differenza_lin_time + differenza_chol_time
   
   # Stampa il tempo impiegato per la decomposizione di Cholesky
   cat("Tempo di esecuzione per la decomposizione di Cholesky e risoluzione sistema lineare: ", round(tempo_cholesky, 4), " secondi\n")
