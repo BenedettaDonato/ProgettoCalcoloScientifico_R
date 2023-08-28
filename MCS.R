@@ -1,13 +1,13 @@
 invisible({
   # Funzione per caricare la matrice dal file .mat e restituire la matrice sparsa
   library(Matrix)
-  library(spam)
-  library(spam64)
+  #library(spam)
+  #library(spam64)
   library(tictoc)
   library(matrixcalc)
   library(pryr)
   library(here)
-  library(SparseM)
+  #library(SparseM)
   library(R.matlab)
   
   
