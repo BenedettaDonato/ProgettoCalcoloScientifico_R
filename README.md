@@ -1,12 +1,12 @@
 # ProgettoCalcoloScientifico_R
-| Matrici | Stato | Dimensione (in b) |
+| Matrici | Stato | Dimensione (in MB) |
 |------------------------|------------------------|-------------------|
-| ex15.mat   | ✅ | Altro dato        |
-| shallow_water1.mat | ✅ | Altri dati        |
-| apache2.mat | ✅ | Altri dati        |
-| parabolic_fem.mat | ✅ | Altri dati        |
-| G3_circuit.mat | ✅ | Altri dati        |
-| cfd1.mat | ✅ | Altri dati        |
-| cfd2.mat | ✅ | Altri dati        |
-| StocF - 1465.mat | ❌ Out of memory | Altri dati        |
-| Flan_1565.mat | ❌ Out of memory | Altri dati        |
+| ex15.mat   | ✅ | 0,555        |
+| shallow_water1.mat | ✅ |   2,263      |
+| apache2.mat | ✅ | 8,302      |
+| parabolic_fem.mat | ✅ | 13,116       |
+| G3_circuit.mat | ✅ | 13,833      |
+| cfd1.mat | ✅ | 14,164      |
+| cfd2.mat | ✅ | 23,192       |
+| StocF - 1465.mat | ❌ Out of memory | 178,368        |
+| Flan_1565.mat | ❌ Out of memory | 292,858  |
