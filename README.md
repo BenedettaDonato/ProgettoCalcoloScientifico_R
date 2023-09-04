@@ -1,5 +1,5 @@
 # ProgettoCalcoloScientifico_R
-| Matrici | Stato | Dimensione |
+| Matrici | Stato | Dimensione (in b) |
 |------------------------|------------------------|-------------------|
 | ex15.mat   | ✅ | Altro dato        |
 | shallow_water1.mat | ✅ | Altri dati        |
